@@ -173,6 +173,8 @@ module.exports = {
         filename: path.posix.join(`${moduleName}`, '[name].[chunkhash].js'), // 输出文件名  
         chunkFilename: path.posix.join(`${moduleName}`, '[name].[id].[chunkhash].js'), // 非入口(non-entry) chunk 文件的名称   
         path: path.resolve(__dirname, `./dist`), // 输出目录的绝对路径   __dirname指的是当前文件的路径
+        // 当打开dev server和打包时 在html将引入js css文件路径出错时的修改
+        // publicPath: `${process.argv[2] == 'serve' ? '/' : '../'}`,
 
     },
     module: {
@@ -310,9 +312,10 @@ module.exports = {
     // 我们在打包完文件之后运行项目文件，此时如果存在错误（比如在源文件 main.js 出现了一个错误），那么它只会跟踪到打包完的 bundle.js 上，对于我们找说，如此跟踪错误来源毫无帮助。因此我们可以使用 JavaScript 自带的 source map 功能帮助我们追踪错误的位置
     devtool: mode == 'development' ? 'eval-cheap-module-source-map' : false, // 开发模式下生成source map，生产模式下不生成  
     plugins: plugins, // 插件列表  
-
+    // npm run start的配置
     devServer: {
         port: 8080,
+        // historyApiFallback: true 配置项是必需的，它确保当浏览器访问一个不存在的路由时，webpack-dev-server 会返回 index.html 文件，而不是显示 404 错误页面
         historyApiFallback: true,
         hot: true,
     },
