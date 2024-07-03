@@ -51,7 +51,7 @@ export class DeliveryTaskList extends React.Component<
                     open={isModal}
                     onCancel={() => this.isModalOpen(false)}
                 >
-                    <p>qqcq.</p>
+                    <p>qcqqqcq.</p>
                     <p>Some contentdawdas...</p>
                     <p>wwwqqqqqqqqqqqqqqqqqqqqqqqqqqqqSome contents...</p>
                    
