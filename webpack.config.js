@@ -317,8 +317,20 @@ module.exports = {
     devServer: {
         port: 8080,
         // historyApiFallback: true 配置项是必需的，它确保当浏览器访问一个不存在的路由时，webpack-dev-server 会返回 index.html 文件，而不是显示 404 错误页面
-        historyApiFallback: true,
         hot: true,
+        // 以下内容为配置代理所需，由于不是create-react-app脚手架而不能在项目中进行配置代理，为了开发环境测试时的跨域问题解决，只能在这个服务器中配置 
+        historyApiFallback: true, // 当使用 HTML5 路由时重定向到 index.html  
+        proxy: [
+            {
+                context: ['/api'], // 可选，定义需要代理的上下文（路径）  
+                target: 'http://localhost:8000', // 目标服务器地址  
+                changeOrigin: true, // 是否改变源，对于域名请求通常需要设置为 true  
+                pathRewrite: { '^/api': '' }, // 路径重写，去除前缀  
+                // 其他代理选项...  
+                // 注意：如果你只代理一个上下文，这里的 context 可以省略，但保持为数组格式  
+            },
+            // 如果有更多的代理规则，继续在这里添加对象  
+        ],
     },
     performance: {
         hints: false, // 禁用性能提示  

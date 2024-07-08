@@ -44,16 +44,17 @@ export class DeliveryTaskList extends React.Component<
      */
     private getData() {
         //配置baseURL
-        axios.defaults.baseURL = 'http://localhost:8000'
         axios({
             method: 'POST',
-            url: '/axios-server',
+            url: '/api/axios-server',
             data: {
                 username: 'qcq',
                 password: 'qcq'
             }
         }).then(value => {
-            console.log(value.data);
+            this.setState({
+                data: value.data.name
+            })
         }).catch(error => {
             console.error('请求失败:', error);
         });
@@ -61,7 +62,7 @@ export class DeliveryTaskList extends React.Component<
     }
 
     componentDidMount(): void {
-        console.log('dawda')
+
     }
 
     render() {
@@ -71,7 +72,6 @@ export class DeliveryTaskList extends React.Component<
                 <Button type='primary' onClick={() => this.isModalOpen(true)} >
                     提交e1qcq
                 </Button>
-                <a href='http://localhost:8080/home'>dsadasda</a>
                 <Modal
                     title='Basic Modal'
                     open={isModal}
@@ -79,7 +79,7 @@ export class DeliveryTaskList extends React.Component<
                     onOk={() => this.getData()}
                 >
                     <p>qcq</p>
-                    <p>Some contentdawdas...</p>
+                    <p>{data && data}</p>
 
                 </Modal>
             </div>
