@@ -25,6 +25,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // 通过yargs库获取webpack命令的参数，这里用于区分开发模式和生产模式  
 const argv = require('yargs').argv
 
+
 let mode = (argv.mode == 'development' ? 'development' : 'production')
 
 // 从命令行参数中获取模块名，这里的获取方式可能不够健壮，需要进一步改进  
@@ -317,10 +318,9 @@ module.exports = {
     // npm run start的配置
     devServer: {
         port: 8080,
-        // historyApiFallback: true 配置项是必需的，它确保当浏览器访问一个不存在的路由时，webpack-dev-server 会返回 index.html 文件，而不是显示 404 错误页面
+        historyApiFallback: true, //配置项是必需的，它确保当浏览器访问一个不存在的路由时，webpack-dev-server 会返回 index.html 文件，而不是显示 404 错误页面
         hot: true,
-        // 以下内容为配置代理所需，由于不是create-react-app脚手架而不能在项目中进行配置代理，为了开发环境测试时的跨域问题解决，只能在这个服务器中配置 
-        historyApiFallback: true, // 当使用 HTML5 路由时重定向到 index.html  
+        // 以下内容为配置代理所需，由于不是create-react-app脚手架而不能在项目中进行配置代理，为了开发环境测试时的跨域问题解决，只能在这个服务器中配置  
         proxy: [
             {
                 context: ['/api1'], // 可选，定义需要代理的上下文（路径）  
