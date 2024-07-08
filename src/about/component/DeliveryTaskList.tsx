@@ -1,10 +1,12 @@
 import * as React from 'react'
 import '../css/task.less'
 import { Button, Modal } from 'antd'
+import axios from 'axios';
 
 interface DeliveryTaskListProps { }
 interface DeliveryTaskListStates {
     isModal: boolean
+    data: ''
 }
 
 /**
@@ -19,7 +21,8 @@ export class DeliveryTaskList extends React.Component<
     constructor(props: DeliveryTaskListProps) {
         super(props)
         this.state = {
-            isModal: false
+            isModal: false,
+            data: ''
         }
     }
 
@@ -36,10 +39,33 @@ export class DeliveryTaskList extends React.Component<
         })
     }
 
-    componentDidMount(): void { }
+    /**
+     * 发送请求
+     */
+    private getData() {
+        //配置baseURL
+        axios.defaults.baseURL = 'http://localhost:8000'
+        axios({
+            method: 'POST',
+            url: '/axios-server',
+            data: {
+                username: 'qcq',
+                password: 'qcq'
+            }
+        }).then(value => {
+            console.log(value.data);
+        }).catch(error => {
+            console.error('请求失败:', error);
+        });
+
+    }
+
+    componentDidMount(): void {
+        console.log('dawda')
+    }
 
     render() {
-        const { isModal } = this.state
+        const { isModal, data } = this.state
         return (
             <div className='header'>
                 <Button type='primary' onClick={() => this.isModalOpen(true)} >
@@ -50,14 +76,16 @@ export class DeliveryTaskList extends React.Component<
                     title='Basic Modal'
                     open={isModal}
                     onCancel={() => this.isModalOpen(false)}
+                    onOk={() => this.getData()}
                 >
                     <p>qcq</p>
                     <p>Some contentdawdas...</p>
-                    <p>wwwqqqqqqqqqqqqqqqqqqqqqqqqqqqqSome contents...</p>
-                   
+
                 </Modal>
             </div>
         )
     }
     t
 }
+
+
