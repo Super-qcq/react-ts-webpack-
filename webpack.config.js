@@ -311,7 +311,8 @@ module.exports = {
         // 其他依赖...  
     },
     // 我们在打包完文件之后运行项目文件，此时如果存在错误（比如在源文件 main.js 出现了一个错误），那么它只会跟踪到打包完的 bundle.js 上，对于我们找说，如此跟踪错误来源毫无帮助。因此我们可以使用 JavaScript 自带的 source map 功能帮助我们追踪错误的位置
-    devtool: mode == 'development' ? 'inline-source-map' : false, // 开发模式下生成source map，生产模式下不生成  
+    // eval-cheap-module-source-map 控制台源代码只显示tsx代码部分 适合大项目，inline-source-map会显示tsx、html、less等所有文件 适合小项目
+    devtool: mode == 'development' ? 'eval-cheap-module-source-map' : false, // 开发模式下生成source map，生产模式下不生成  
     plugins: plugins, // 插件列表  
     // npm run start的配置
     devServer: {
@@ -322,7 +323,6 @@ module.exports = {
         historyApiFallback: true, // 当使用 HTML5 路由时重定向到 index.html  
         proxy: [
             {
-                
                 context: ['/api1'], // 可选，定义需要代理的上下文（路径）  
                 target: 'http://sph-h5-api.atguigu.cn', // 目标服务器地址  
                 changeOrigin: true, // 是否改变源，对于域名请求通常需要设置为 true  
