@@ -45,15 +45,12 @@ export class DeliveryTaskList extends React.Component<
     private getData() {
         //配置baseURL
         axios({
-            method: 'POST',
-            url: '/api/axios-server',
-            data: {
-                username: 'qcq',
-                password: 'qcq'
-            }
+            method: 'get',
+            url: '/api1/api/product/getBaseCategoryList',
         }).then(value => {
+            // console.log(value.data.data[0].categoryName)
             this.setState({
-                data: value.data.name
+                data: value.data.data[0].categoryName
             })
         }).catch(error => {
             console.error('请求失败:', error);
@@ -85,7 +82,7 @@ export class DeliveryTaskList extends React.Component<
             </div>
         )
     }
-    t
+    
 }
 
 

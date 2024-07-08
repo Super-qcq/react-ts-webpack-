@@ -322,10 +322,11 @@ module.exports = {
         historyApiFallback: true, // 当使用 HTML5 路由时重定向到 index.html  
         proxy: [
             {
-                context: ['/api'], // 可选，定义需要代理的上下文（路径）  
-                target: 'http://localhost:8000', // 目标服务器地址  
+                
+                context: ['/api1'], // 可选，定义需要代理的上下文（路径）  
+                target: 'http://sph-h5-api.atguigu.cn', // 目标服务器地址  
                 changeOrigin: true, // 是否改变源，对于域名请求通常需要设置为 true  
-                pathRewrite: { '^/api': '' }, // 路径重写，去除前缀  
+                pathRewrite: { '^/api1': '' }, // 路径重写，去除前缀  
                 // 其他代理选项...  
                 // 注意：如果你只代理一个上下文，这里的 context 可以省略，但保持为数组格式  
             },
