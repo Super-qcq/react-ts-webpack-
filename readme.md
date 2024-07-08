@@ -24,9 +24,10 @@
 装npm install @babel/preset-typescript --save-dev。
 装npm install @babel/preset-react --save-dev。
 装npm install css-loader --save-dev。
+装npm install http-proxy-middleware --save-de
 装npm install less less-loader --save-dev。 -->
 一条命令执行
-npm install  less less-loader css-loader @babel/preset-react @babel/preset-typescript @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-syntax-dynamic-import @babel/plugin-proposal-class-properties yargs  babel-loader raw-loader   thread-loader   babel-plugin-import  @babel/plugin-proposal-decorators --save-dev
+npm install  less less-loader css-loader @babel/preset-react @babel/preset-typescript @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-syntax-dynamic-import @babel/plugin-proposal-class-properties yargs  babel-loader raw-loader   thread-loader   babel-plugin-import  @babel/plugin-proposal-decorators http-proxy-middleware --save-dev
 
 
 
