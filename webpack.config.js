@@ -86,7 +86,9 @@ moduleConfig.forEach(m => {
             } else {
                 // 否则，初始化htmlPlugins(生成 HTML 文件的插件.生成的index.html文件将会以script标签的形式引入每一个输出js文件（通过output.filename选项配置）)对象  
                 htmlPlugins[htmlKey] = {
-                    template: 'raw-loader!' + config.htmlPath + config.htmlName + '.' + config.htmlType,
+                    // 以原html文件为模板的文件路径
+                    template: config.htmlPath + config.htmlName + '.' + config.htmlType,
+                    // 
                     filename: `${m.name}/${config.targetName || config.htmlName}.${config.htmlType}`,
                     chunks: [config.name]
                 }
@@ -94,9 +96,9 @@ moduleConfig.forEach(m => {
             // 添加MiniCssExtractPlugin插件到plugins数组  
             plugins.push(
                 new MiniCssExtractPlugin({
-                    filename: `${m.name}/[name].[chunkhash].css`,
+                    filename: `${m.name}/css/[name].[chunkhash].css`,
                     //控制从打包后的非入口JS文件中提取CSS样式生成的CSS文件的名称
-                    chunkFilename: `${m.name}/[name].[id].[chunkhash].css`,
+                    chunkFilename: `${m.name}/css/[name].[id].[chunkhash].css`,
                     // 控制css的引入顺序不一致是否警告，true表示警告，false表示不警告 这个选项会忽略CSS文件中导入（@import）的顺序
                     ignoreOrder: true
                 }),
@@ -172,8 +174,8 @@ module.exports = {
     entry: entrys, // 设置入口文件  
     output: {
         // 是一个用于跨平台路径拼接的方法，确保无论你的代码在Windows、Linux还是macOS上运行，都能得到正确的路径格式。这里它被用来拼接模块名称(moduleName)和动态生成的文件名([name].[chunkhash].js)
-        filename: path.posix.join(`${moduleName}`, '[name].[chunkhash].js'), // 输出文件名  
-        chunkFilename: path.posix.join(`${moduleName}`, '[name].[id].[chunkhash].js'), // 非入口(non-entry) chunk 文件的名称   
+        filename: path.posix.join(`${moduleName}`, 'js/[name].[chunkhash].js'), // 输出文件名  
+        chunkFilename: path.posix.join(`${moduleName}`, 'js/[name].[id].[chunkhash].js'), // 非入口(non-entry) chunk 文件的名称   
         path: path.resolve(__dirname, `./dist`), // 输出目录的绝对路径   __dirname指的是当前文件的路径
         // 当打开dev server和打包时 在html将引入js css文件路径出错时的修改
         // publicPath: `${process.argv[2] == 'serve' ? '/' : '../'}`,
@@ -254,7 +256,7 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             limit: 10000, // 文件大小小于10kb时，将转化为base64编码  
-                            name: path.posix.join(`dist/${moduleName}/imgs/`, `[name].[hash:7].[ext]`) // 输出文件的名称  
+                            name: path.posix.join(`${moduleName}/imgs/`, `[name].[hash:7].[ext]`) // 输出文件的名称  
                         }
                     }
                 ]
