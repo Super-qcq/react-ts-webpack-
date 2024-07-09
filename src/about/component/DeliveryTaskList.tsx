@@ -83,6 +83,7 @@ export class DeliveryTaskList extends React.Component<
                     <p>{data && data}</p>
 
                 </Modal>
+                <img src='../staticFile/3Xihnvg6nt.jpg'></img>
             </div>
         )
     }
