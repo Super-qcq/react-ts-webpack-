@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress --mode development --env",
+    "buildPro": "webpack --progress --mode production --env",
     "start": "webpack serve --open"
   },
   "keywords": [],

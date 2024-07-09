@@ -88,17 +88,18 @@ moduleConfig.forEach(m => {
                 htmlPlugins[htmlKey] = {
                     // 以原html文件为模板的文件路径
                     template: config.htmlPath + config.htmlName + '.' + config.htmlType,
-                    // 
-                    filename: `${m.name}/${config.targetName || config.htmlName}.${config.htmlType}`,
+                    // 1.生成的html模板文件的路径 ${m.name}/${config.targetName || config.htmlName}.${config.htmlType} 去掉模块名放在output.path中
+                    filename: `${config.targetName || config.htmlName}.${config.htmlType}`,
                     chunks: [config.name]
                 }
             }
             // 添加MiniCssExtractPlugin插件到plugins数组  
+            // 2.生成的css文件 ${m.name}/css/[name].[chunkhash].css 去掉模块名放在output.path中
             plugins.push(
                 new MiniCssExtractPlugin({
-                    filename: `${m.name}/css/[name].[chunkhash].css`,
+                    filename: `css/[name].[chunkhash].css`,
                     //控制从打包后的非入口JS文件中提取CSS样式生成的CSS文件的名称
-                    chunkFilename: `${m.name}/css/[name].[id].[chunkhash].css`,
+                    chunkFilename: `css/[name].[id].[chunkhash].css`,
                     // 控制css的引入顺序不一致是否警告，true表示警告，false表示不警告 这个选项会忽略CSS文件中导入（@import）的顺序
                     ignoreOrder: true
                 }),
@@ -174,11 +175,12 @@ module.exports = {
     entry: entrys, // 设置入口文件  
     output: {
         // 是一个用于跨平台路径拼接的方法，确保无论你的代码在Windows、Linux还是macOS上运行，都能得到正确的路径格式。这里它被用来拼接模块名称(moduleName)和动态生成的文件名([name].[chunkhash].js)
-        filename: path.posix.join(`${moduleName}`, 'js/[name].[chunkhash].js'), // 输出文件名  
-        chunkFilename: path.posix.join(`${moduleName}`, 'js/[name].[id].[chunkhash].js'), // 非入口(non-entry) chunk 文件的名称   
-        path: path.resolve(__dirname, `./dist`), // 输出目录的绝对路径   __dirname指的是当前文件的路径
+        // 3.生成的js文件的路径 path.posix.join(`${moduleName}`, 'js/[name].[chunkhash].js') 去掉模块名放在output.path中
+        filename: path.posix.join('js/[name].[chunkhash].js'), // 输出文件名  
+        chunkFilename: path.posix.join('js/[name].[id].[chunkhash].js'), // 非入口(non-entry) chunk 文件的名称   
+        path: path.resolve(__dirname, `./dist/${moduleName}`), // 输出目录的绝对路径   __dirname指的是当前文件的路径。这里将模块名也放进来在dist后面的目的就是 让生成的js、css文件以当前模块下的路径为相对路径去引入到html文件中，如果后期多文件打包报错就要改回来
         // 当打开dev server和打包时 在html将引入js css文件路径出错时的修改
-        // publicPath: `${process.argv[2] == 'serve' ? '/' : '../'}`,
+        // publicPath: `${process.argv[2] == 'serve' ? '/' : './'}`,
 
     },
     module: {
@@ -250,17 +252,22 @@ module.exports = {
             },
             // 处理图片文件  
             {
-                test: /\.(png|svg|jpe?g|gif)(\?.*)?$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 10000, // 文件大小小于10kb时，将转化为base64编码  
-                            name: path.posix.join(`${moduleName}/imgs/`, `[name].[hash:7].[ext]`) // 输出文件的名称  
-                        }
-                    }
-                ]
-            }
+                test: /\.(png|svg|jpe?g|gif|webp)$/,
+                type: "asset/resource",
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024, // 小于10kb的图片会被base64处理
+                    },
+                },
+                generator: {
+                    // 将图片文件输出到 static/imgs 目录中
+                    // 将图片文件命名 [hash:8][ext][query]
+                    // [hash:8]: hash值取8位
+                    // [ext]: 使用之前的文件扩展名
+                    // [query]: 添加之前的query参数
+                    filename: path.posix.join(`imgs/`, `[name].[hash:7].[ext]`),
+                },
+            },
         ]
     },
     resolve: {
