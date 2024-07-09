@@ -1,7 +1,7 @@
 import * as React from 'react'
 import '../css/task.less'
 import { Button, Modal } from 'antd'
-import axios from 'axios';
+import axios from 'axios';  
 
 interface DeliveryTaskListProps { }
 interface DeliveryTaskListStates {
@@ -83,7 +83,7 @@ export class DeliveryTaskList extends React.Component<
                     <p>{data && data}</p>
 
                 </Modal>
-                <img src='../staticFile/3Xihnvg6nt.jpg'></img>
+                <img src={'../staticFile/3Xihnvg6nt.jpg'}></img>
                 <div className='img'></div>
             </div>
         )

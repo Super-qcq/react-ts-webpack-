@@ -122,7 +122,7 @@ moduleConfig.forEach(m => {
             )
         }
 
-        // 处理静态文件复制  （如果你没有在 .tsx 文件中通过 import 或 require 引入图片，而是直接在 JSX 中使用了相对路径，那么你可能需要使用 CopyWebpackPlugin 来将图片所在的文件夹 从而将图片文件放到打包的模块路径下）
+        // 处理静态文件复制  （如果 你没有在 .tsx 文件中通过 import 或 require 引入图片，而是直接在 JSX 中使用了相对路径，那么你可能需要使用 CopyWebpackPlugin 来将图片所在的文件夹 从而将图片文件放到打包的模块路径下）
         if (Array.isArray(m.data.staticFrom) && m.data.staticFrom.length > 0) {
             const patterns = m.data.staticFrom.map(staticFromPath => {
                 // 将 from 路径转换为绝对路径（可选，但符合你的要求）  
@@ -180,7 +180,7 @@ module.exports = {
         chunkFilename: path.posix.join('js/[name].[id].[chunkhash].js'), // 非入口(non-entry) chunk 文件的名称   
         path: path.resolve(__dirname, `./dist/${moduleName}`), // 输出目录的绝对路径   __dirname指的是当前文件的路径。这里将模块名也放进来在dist后面的目的就是 让生成的js、css文件以当前模块下的路径为相对路径去引入到html文件中，如果后期多文件打包报错就要改回来
         // 当打开dev server和打包时 在html将引入js css文件路径出错时的修改
-        // publicPath: `${process.argv[2] == 'serve' ? '/' : './'}`,
+        // publicPath: ` ${mode == 'development' ? './' : ''}`,
 
     },
     module: {
@@ -251,7 +251,7 @@ module.exports = {
                 ]
             },
             // 处理图片文件  使用 asset/resource 模块类型（但通常代码中需要配合 import 或 require 才能触发这个插件 从而将图片文件放到打包的模块路径下）
-            
+
             {
                 test: /\.(png|svg|jpe?g|gif|webp)$/,
                 type: "asset/resource",
