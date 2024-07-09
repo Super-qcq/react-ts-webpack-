@@ -122,7 +122,7 @@ moduleConfig.forEach(m => {
             )
         }
 
-        // 处理静态文件复制  
+        // 处理静态文件复制  （如果你没有在 .tsx 文件中通过 import 或 require 引入图片，而是直接在 JSX 中使用了相对路径，那么你可能需要使用 CopyWebpackPlugin 来将图片所在的文件夹 从而将图片文件放到打包的模块路径下）
         if (Array.isArray(m.data.staticFrom) && m.data.staticFrom.length > 0) {
             const patterns = m.data.staticFrom.map(staticFromPath => {
                 // 将 from 路径转换为绝对路径（可选，但符合你的要求）  
@@ -250,7 +250,8 @@ module.exports = {
                     'less-loader' // 处理LESS文件  
                 ]
             },
-            // 处理图片文件  
+            // 处理图片文件  使用 asset/resource 模块类型（但通常代码中需要配合 import 或 require 才能触发这个插件 从而将图片文件放到打包的模块路径下）
+            
             {
                 test: /\.(png|svg|jpe?g|gif|webp)$/,
                 type: "asset/resource",
