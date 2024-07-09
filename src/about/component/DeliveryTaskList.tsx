@@ -46,12 +46,16 @@ export class DeliveryTaskList extends React.Component<
         //配置baseURL
         axios({
             method: 'get',
-            url: '/api1/api/product/getBaseCategoryList',
+            url: '/dev/api/product/getBaseCategoryList',
         }).then(value => {
-            // console.log(value.data.data[0].categoryName)
-            this.setState({
-                data: value.data.data[0].categoryName
-            })
+            if (value && value.data && value.data.data && value.data.data.length > 0) {
+                this.setState({
+                    data: value.data.data[0].categoryName
+                });
+            } else {
+                console.error('返回的数据格式不正确或数据为空');
+                // 可以设置一个错误状态或默认值  
+            }
         }).catch(error => {
             console.error('请求失败:', error);
         });
@@ -82,7 +86,7 @@ export class DeliveryTaskList extends React.Component<
             </div>
         )
     }
-    
+
 }
 
 
