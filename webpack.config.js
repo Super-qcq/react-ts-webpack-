@@ -1,6 +1,6 @@
 // 引入Node.js的path模块，用于处理文件和目录的路径  
 const path = require('path')
-
+const webpack = require('webpack'); // 导入webpack模块  
 // 引入项目的baseConfigs配置，通常这些配置定义了项目的模块信息  
 const baseConfigs = require('./build/configs')
 
@@ -36,6 +36,7 @@ if (process.argv[2] == 'serve') {
     moduleName = process.argv[4]
     mode = 'development'
 }
+
 // 定义一个函数，根据模块名获取对应的配置模块信息  
 function getModules(moduleName) {
     let modules = baseConfigs.map(function (config) {
@@ -61,6 +62,12 @@ if (!moduleConfig || moduleConfig.length < 1) {
 const entrys = {},
     plugins = []
 
+// 根据开发模式动态添加 HotModuleReplacementPlugin  
+if (mode !== 'production') {
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
+
 // 遍历模块配置，为每个模块设置webpack的入口和插件  
 moduleConfig.forEach(m => {
     const webpackTask = m.data.webpack
@@ -73,10 +80,10 @@ moduleConfig.forEach(m => {
             // 设置webpack的入口   src/home/html/index.tsx
             entrys[config.name] = path.join(__dirname, config.source[0])
             // 生成htmlKey，用于区分不同的HTML模板  
-            // source: [ 'src/home/html/index.tsx' ],
-            // target: 'dist/home',
-            // name: 'home',
-            // htmlPath: 'src/home/html/',
+            // source: ['src/about/index.tsx'],
+            // target: 'dist/about/js',
+            // name: 'main',
+            // htmlPath: 'src/about/html/',
             // htmlName: 'index',
             // htmlType: 'html'
             const htmlKey = config.htmlPath + config.htmlName + '.' + config.htmlType
@@ -266,7 +273,7 @@ module.exports = {
                     // [hash:8]: hash值取8位
                     // [ext]: 使用之前的文件扩展名
                     // [query]: 添加之前的query参数
-                    filename: path.posix.join(`imgs/`, `[name].[hash:7].[ext]`),
+                    filename: path.posix.join(`imgs/`, `[name][ext]`),
                 },
             },
         ]

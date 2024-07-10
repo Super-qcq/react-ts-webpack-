@@ -1,7 +1,9 @@
 import * as React from 'react'
 import '../css/task.less'
 import { Button, Modal } from 'antd'
-import axios from 'axios';  
+import axios from 'axios';
+import { Link, Route, Routes } from 'react-router-dom';
+import { HomeDeliveryTaskList } from './HomeDeliveryTaskList';
 
 interface DeliveryTaskListProps { }
 interface DeliveryTaskListStates {
@@ -70,6 +72,10 @@ export class DeliveryTaskList extends React.Component<
         const { isModal, data } = this.state
         return (
             <div className='header'>
+                <Link className="list-group-item" to="/home">Home</Link>
+                <Routes>
+                    <Route path="/home" element={<HomeDeliveryTaskList />}> </Route>
+                </Routes>
                 <Button type='primary' onClick={() => this.isModalOpen(true)} >
                     提交e1qcq
                 </Button>
@@ -79,12 +85,13 @@ export class DeliveryTaskList extends React.Component<
                     onCancel={() => this.isModalOpen(false)}
                     onOk={() => this.getData()}
                 >
-                    <p>qcq</p>
+                    <p>qcqqcqqcq</p>
                     <p>{data && data}</p>
 
                 </Modal>
-                <img src={'../staticFile/3Xihnvg6nt.jpg'}></img>
+                <img src={'../imgs/3Xihnvg6nt.jpg'}></img>
                 <div className='img'></div>
+
             </div>
         )
     }

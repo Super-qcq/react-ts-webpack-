@@ -1,10 +1,13 @@
-import React from 'react';  
-import ReactDOM from 'react-dom/client';  
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom'
 import { DeliveryTaskList } from './component/DeliveryTaskList'
- 
-const root = ReactDOM.createRoot(document.getElementById('root'));  
-root.render(  
-  <React.StrictMode>  
-    <DeliveryTaskList />  
-  </React.StrictMode>  
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <DeliveryTaskList />
+        </BrowserRouter>
+    </React.StrictMode>
 );
