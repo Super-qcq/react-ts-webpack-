@@ -3,7 +3,7 @@ import '../css/task.less'
 import { Button, Modal } from 'antd'
 import axios from 'axios';
 import { Link, Route, Routes } from 'react-router-dom';
-import { HomeDeliveryTaskList } from './HomeDeliveryTaskList';
+import { AboutDeliveryTaskList } from './aboutDeliveryTaskList';
 
 interface DeliveryTaskListProps { }
 interface DeliveryTaskListStates {
@@ -72,10 +72,13 @@ export class DeliveryTaskList extends React.Component<
         const { isModal, data } = this.state
         return (
             <div className='header'>
-                <Link className="list-group-item" to="/home">Home</Link>
+
                 <Routes>
-                    <Route path="/home" element={<HomeDeliveryTaskList />}> </Route>
+                    <Route path="/about" element={<AboutDeliveryTaskList />}> </Route>
                 </Routes>
+                <div style={{color:'red'}}>-----------------------------------------------------</div>
+                {/* 路由跳转到组件 */}
+                <Link className="list-group-item" to="/about">About</Link>
                 <Button type='primary' onClick={() => this.isModalOpen(true)} >
                     提交e1qcq
                 </Button>
@@ -89,8 +92,11 @@ export class DeliveryTaskList extends React.Component<
                     <p>{data && data}</p>
 
                 </Modal>
+
                 <img src={'../imgs/3Xihnvg6nt.jpg'}></img>
                 <div className='img'></div>
+                {/* 多入口页面打包之后页面之间的跳转，打包之后两页面在同一个域名之下，所以直接指向该页面即可 */}
+                <a href="aboutIndex.html">跳转到AboutIndex</a>
 
             </div>
         )

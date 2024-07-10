@@ -1,10 +1,10 @@
 import * as React from 'react'
-import "../css/homeTask.less"
+import "../css/aboutTask.less"
 import { Button, Modal } from 'antd';
 
-interface HomeDeliveryTaskListProps {
+interface AboutDeliveryTaskListProps {
 }
-interface HomeDeliveryTaskListStates {
+interface AboutDeliveryTaskListStates {
     isModal: boolean
     inf: { name: string, age: number, sex: string }
     
@@ -15,9 +15,9 @@ interface HomeDeliveryTaskListStates {
  * 
  * @author 
  */
-export class HomeDeliveryTaskList extends React.Component<HomeDeliveryTaskListProps, HomeDeliveryTaskListStates> {
+export class AboutDeliveryTaskList extends React.Component<AboutDeliveryTaskListProps, AboutDeliveryTaskListStates> {
 
-    constructor(props: HomeDeliveryTaskListProps) {
+    constructor(props: AboutDeliveryTaskListProps) {
         super(props);
         this.state = {
             isModal: false,

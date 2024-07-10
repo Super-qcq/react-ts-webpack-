@@ -12,11 +12,11 @@ module.exports = {
             htmlType: 'html'
         },
         {
-            source: ['src/about/homeIndex.tsx'],
+            source: ['src/about/aboutIndex.tsx'],
             target: 'dist/about/js',
-            name: 'homeIndex',
+            name: 'aboutIndex',
             htmlPath: 'src/about/html/',
-            htmlName: 'homeIndex',
+            htmlName: 'aboutIndex',
             htmlType: 'html'
         }
     ]
