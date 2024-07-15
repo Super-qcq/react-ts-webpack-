@@ -80,7 +80,7 @@ export class DeliveryTaskList extends React.Component<
                 {/* 路由跳转到组件 */}
                 <Link className="list-group-item" to="/about">About</Link>
                 <Button type='primary' onClick={() => this.isModalOpen(true)} >
-                    提交e1qcq
+                qcq提交e1qcq
                 </Button>
                 <Modal
                     title='Basic Modal'
@@ -96,7 +96,7 @@ export class DeliveryTaskList extends React.Component<
                 <img src={'../imgs/3Xihnvg6nt.jpg'}></img>
                 <div className='img'></div>
                 {/* 多入口页面打包之后页面之间的跳转，打包之后两页面在同一个域名之下，所以直接指向该页面即可 */}
-                <a href="aboutIndex.html">跳转到AboutIndex</a>
+                <a href="aboutIndex.html">qcq跳转到AboutIndex</a>
 
             </div>
         )
