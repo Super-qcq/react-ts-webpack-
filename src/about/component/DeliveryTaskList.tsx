@@ -80,7 +80,7 @@ export class DeliveryTaskList extends React.Component<
                 {/* 路由跳转到组件 */}
                 <Link className="list-group-item" to="/about">About</Link>
                 <Button type='primary' onClick={() => this.isModalOpen(true)} >
-                qcq提交e1qcq
+                qcq提交eqcq
                 </Button>
                 <Modal
                     title='Basic Modal'
