@@ -88,7 +88,7 @@ export class DeliveryTaskList extends React.Component<
                     onCancel={() => this.isModalOpen(false)}
                     onOk={() => this.getData()}
                 >
-                    <p>qcqqcqqcq</p>
+                    <p>qqcqqcq</p>
                     <p>{data && data}</p>
 
                 </Modal>
