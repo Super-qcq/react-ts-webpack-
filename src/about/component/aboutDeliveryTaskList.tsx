@@ -67,15 +67,7 @@ export class AboutDeliveryTaskList extends React.Component<AboutDeliveryTaskList
                 }
                 <Button type="primary" onClick={this.updateInf}>修改信息</Button>
             </Modal>
-            <div className='nav'>
-                <div className='nav2'></div>
-            </div>
-            <div className='nav3'>
-                <div className='nav4'><span style={{ textDecoration: 'underline red' }}>qq</span></div>
-            </div>
-            <div className='nav5'>
-                <div className='nav6'></div>
-            </div>
+            
         </div >
     }
 }

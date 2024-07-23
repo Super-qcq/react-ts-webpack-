@@ -43,27 +43,30 @@
         height: 100px;
         background-color: yellow;
         position: relative;
+
         // float: right;
-        .nav4{
-            width:50px;
+        .nav4 {
+            width: 50px;
             height: 50px;
             background-color: aqua;
-            margin:0 auto;
+            margin: 0 auto;
             position: absolute;
             left: 0;
             text-align: center;
-           
+
         }
     }
-    .nav5{
+
+    .nav5 {
         width: 100px;
         height: 100px;
         background-color: orangered;
         display: flex;
         // justify-content: center;
         // align-items: center;
-        flex-direction:row-reverse;
-        .nav6{
+        flex-direction: row-reverse;
+
+        .nav6 {
             width: 50px;
             height: 50px;
             background-color: royalblue;
@@ -71,4 +74,34 @@
         }
     }
 
+    .scrollInfo {
+        width: 800px;
+        height: 370px;
+        display: flex;
+        // align-items: flex-start;
+        /* 根据内容调整垂直对齐方式 */
+    }
+
+    .List {
+        flex: 1;
+        /* 使得List组件根据内容宽度自动调整 */
+        width: auto;
+        /* 根据内容自动调整宽度 */
+        border: none;
+    }
+
+    .splitLine {
+        width: 1px;
+        /* 分割线的宽度 */
+        height: 100%;
+        /* 分割线的高度占满容器高度 */
+        background-color: black;
+        margin: 0;
+        /* 根据需要调整，如果需要垂直居中则可能需要其他设置 */
+    }
+
+    .scrollInfoRight {
+        flex: 1;
+        width: 50%;
+    }
 }
