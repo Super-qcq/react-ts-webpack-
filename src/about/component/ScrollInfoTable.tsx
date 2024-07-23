@@ -43,7 +43,7 @@ export class ScrollInfoTable extends React.Component<ScrollInfoTableProps, Scrol
         const { id, name } = this.props
         return (
             <div ref={ref => this.container = ref}>
-                <div style={{ width: '300px', height: '200px', backgroundColor:'#000' }}>
+                <div style={{ height: '200px', backgroundColor:'#000' }}>
                     qcq+{id}
                 </div>
             </div>
