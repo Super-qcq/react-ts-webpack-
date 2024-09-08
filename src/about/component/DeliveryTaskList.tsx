@@ -8,6 +8,8 @@ import { AboutDeliveryTaskList } from './aboutDeliveryTaskList';
 import { ScrollInfoTable } from './ScrollInfoTable';
 import * as $ from 'jquery';
 import { UpdateInfo } from './UpdateInfo';
+import  HongNotification  from './HongNotification';
+import qs from 'qs';
 
 interface DeliveryTaskListProps { }
 interface DeliveryTaskListStates {
@@ -16,19 +18,17 @@ interface DeliveryTaskListStates {
     updateInfoData: string,
     scrollInfo: { id: string, name: string }[]
     selectListId: string
+    saySomething(): void// 抽象方法
 }
 
 /**
- * 上传任务列表
  *
  * @author
  */
-export class DeliveryTaskList extends React.Component<
-    DeliveryTaskListProps,
-    DeliveryTaskListStates
-> {
-    scrollTopContainer: any;
-    scrollPanel: HTMLDivElement;
+export class DeliveryTaskList extends React.Component<DeliveryTaskListProps, DeliveryTaskListStates, any> {
+
+    private scrollTopContainer: HTMLDivElement;
+    private scrollPanel: HTMLDivElement;
     constructor(props: DeliveryTaskListProps) {
         super(props)
         this.state = {
@@ -36,39 +36,35 @@ export class DeliveryTaskList extends React.Component<
             data: '',
             updateInfoData: '',
             scrollInfo: [],
-            selectListId: ''
+            selectListId: '',
+            saySomething: () => {
+                // 抽象方法的实现
+            }
         }
     }
 
     private isModalOpen = (isModal: boolean) => {
-        let i = 1
-        let arr = []
-        arr.forEach(element => { })
-        while (i < 10) {
-            i++
-        }
-
         this.setState({
-            isModal,
+            isModal
         })
     }
+
 
     /**
      * 发送请求
      */
-    private getData() {
-        //配置baseURL
-        axios({
-            method: 'get',
-            url: '/dev/api/product/getBaseCategoryList',
-        }).then(value => {
+    private getData = () => {
+        axios({ method: 'get', url: '/dev/api/product/getBaseCategoryList', }).then(value => {
             if (value && value.data && value.data.data && value.data.data.length > 0) {
+                HongNotification.success({msg:'ok'})
                 this.setState({
                     data: value.data.data[0].categoryName
-                });
+                }, () => { 
+             
+                    
+                })
             } else {
                 console.error('返回的数据格式不正确或数据为空');
-                // 可以设置一个错误状态或默认值  
             }
         }).catch(error => {
             console.error('请求失败:', error);
@@ -86,7 +82,7 @@ export class DeliveryTaskList extends React.Component<
      * 设置滚动的区域
      * @param container 
      */
-    private handleOnScroll = (container) => {
+    private handleOnScroll = (container: HTMLDivElement) => {
         this.scrollTopContainer = container
     }
 
@@ -121,7 +117,7 @@ export class DeliveryTaskList extends React.Component<
         // offsetTop获取的是在整个页面位置中的top值 要滚动区域内容的top值减去整个右边区域所在的位置的top值
         const top: number = this.scrollTopContainer && this.scrollTopContainer.offsetTop - this.scrollPanel.offsetTop;
         if (top) {
-            $(this.scrollPanel).animate({scrollTop: top}, 'slow');
+            $(this.scrollPanel).animate({ scrollTop: top }, 'slow');
         }
     }
 
@@ -145,7 +141,7 @@ export class DeliveryTaskList extends React.Component<
                     title='Basic Modal'
                     open={isModal}
                     onCancel={() => this.isModalOpen(false)}
-                    onOk={() => this.getData()}
+                    onOk={this.getData}
                 >
                     <p>qqcqqcq</p>
                     <p>{data && data}</p>

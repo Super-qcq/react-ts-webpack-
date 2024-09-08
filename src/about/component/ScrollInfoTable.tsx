@@ -5,7 +5,7 @@ interface ScrollInfoTableProps {
     id: string,
     name: string,
     isScrollClick: boolean,
-    handleOnScroll: (container: any) => void
+    handleOnScroll: (container: HTMLDivElement) => void
 }
 interface ScrollInfoTableStates {
 
@@ -17,7 +17,7 @@ interface ScrollInfoTableStates {
  * @author
  */
 export class ScrollInfoTable extends React.Component<ScrollInfoTableProps, ScrollInfoTableStates> {
-    container: any
+    private container: HTMLDivElement
 
     constructor(props: ScrollInfoTableProps) {
         super(props)

@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        // 当ts文件语法错误时不要转化为js文件中的错误代码
+        "noEmitOnError": false,
         //输出目录为build
         "outDir": "./built",
         //接受js作为输入

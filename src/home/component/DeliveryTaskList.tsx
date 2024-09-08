@@ -7,7 +7,15 @@ interface DeliveryTaskListProps {
 interface DeliveryTaskListStates {
     isModal: boolean
     inf: { name: string, age: number, sex: string }
-    
+
+}
+
+function demo(target: Function) {
+    return class {
+        test() {
+            console.log(100)
+        }
+    }
 }
 
 /**
@@ -15,6 +23,7 @@ interface DeliveryTaskListStates {
  * 
  * @author 
  */
+
 export class DeliveryTaskList extends React.Component<DeliveryTaskListProps, DeliveryTaskListStates> {
 
     constructor(props: DeliveryTaskListProps) {
@@ -79,4 +88,6 @@ export class DeliveryTaskList extends React.Component<DeliveryTaskListProps, Del
         </div >
     }
 }
+
+
 
