@@ -1,0 +1,41 @@
+/* ===== 商品中心 ===== */
+.product-grid {
+  .product-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+  }
+  .product-thumb {
+    height: 200px;
+    object-fit: cover;
+    background: #fafafa;
+  }
+  .product-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .product-desc {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .product-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f5222d;
+  }
+  .product-original {
+    font-size: 13px;
+    color: #bbb;
+    text-decoration: line-through;
+    margin-left: 6px;
+  }
+}
+.pagination-bar {
+  text-align: center;
+  margin-top: 28px;
+}

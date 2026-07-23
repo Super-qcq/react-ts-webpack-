@@ -1,0 +1,127 @@
+{
+    "name": "tsdemo", // 项目名称
+    "version": "1.0.0", // 项目版本号
+    "main": "index.js", // 项目默认入口文件
+    "scripts": {
+        // ==========================================
+        // 1. 本地开发服务器启动命令 (Start)
+        // ==========================================
+        // 命令：npm start  (或 npm run start)
+        "start": "webpack serve --mode development --open",
+        /* 【语法拆解】：
+            - webpack serve : Webpack 5 专属命令，唤起 webpack-dev-server，在内存中编译代码并启动本地 HTTP 服务器（默认 localhost:8080）。
+            - --mode development : 强制告诉 Webpack 当前处于"开发模式"，自动开启热更新、保留清晰报错、代码不压缩。
+            - --open : 启动后自动打开默认浏览器访问项目主页。
+            - (隐含参数) module=xxx : 通过 --env module=shop-system 或追加 module=xxx 指定只启动某个模块。
+            */
+        // ==========================================
+        // 2. 单模块生产环境打包命令 (Build)
+        // ==========================================
+        // 命令：npm run build -- --env module=shop-system
+        "build": "webpack --progress --mode production",
+        /* 【语法拆解】：
+            - webpack : 调用 Webpack 核心编译器，读取源码，编译压缩后写入 dist/ 目录。
+            - --progress : 终端显示打包百分比进度条。
+            - --mode production : 开启最严苛优化：极度压缩、去除空格与 console.log、Tree Shaking 摇掉未用代码。
+            */
+        // ==========================================
+        // 3. 全量打包命令（configs.js 里注册的所有模块一起打）
+        // ==========================================
+        // 命令：npm run build:all
+        "build:all": "webpack --progress --mode production",
+        /* 【语法拆解】：
+            不传 module 参数 → webpack.config.js 遍历 build/configs.js 的全部模块，输出到 dist/all/。
+            */
+        // ==========================================
+        // 4. 代码规范检查 (Lint)
+        // ==========================================
+        // 命令：npm run lint
+        "lint": "eslint src/ --ext .ts,.tsx",
+        // 命令：npm run lint:fix （自动修复）
+        "lint:fix": "eslint src/ --ext .ts,.tsx --fix",
+        // ==========================================
+        // 5. 代码格式化检查 (Prettier)
+        // ==========================================
+        // 命令：npm run format （自动格式化）
+        "format": "prettier --write \"src/**/*.{ts,tsx,less,json}\"",
+        // 命令：npm run format:check （仅检查，不修改）
+        "format:check": "prettier --check \"src/**/*.{ts,tsx,less,json}\"",
+        // ==========================================
+        // 6. 一站式检查（Lint + 格式化）
+        // ==========================================
+        // 命令：npm run check
+        "check": "npm run lint && npm run format:check",
+        // ==========================================
+        // 7. 单元测试 (Jest)
+        // ==========================================
+        // 命令：npm test  (或 npm run test)
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "React + TypeScript + Webpack 5 多模块构建脚手架，集成 ESLint / Prettier / Jest / CI",
+    // ==========================================
+    // 📦 生产环境依赖 (dependencies) - 会打包进最终的上线文件
+    // ==========================================
+    "dependencies": {
+        // --- 1. React 视图框架 ---
+        "react": "^19.2.8", // React 核心视图库
+        "react-dom": "^19.2.8", // React 浏览器渲染核心（虚拟 DOM → 真实 DOM）
+        // --- 2. 前端路由 ---
+        "react-router-dom": "^7.18.1", // SPA 单页应用路由（无刷新跳转）
+        // --- 3. UI 组件库 ---
+        "antd": "^6.5.1", // Ant Design 企业级 UI 组件库
+        // --- 4. 网络请求 ---
+        "axios": "^1.18.1", // Promise 封装的 HTTP 客户端
+        // --- 5. Babel 运行时辅助 ---
+        "@babel/runtime": "^7.29.7" // 提取 Babel 注入的辅助函数，减小打包体积，防止全局污染
+    },
+    // ==========================================
+    // 🛠️ 开发环境依赖 (devDependencies) - 只参与编译/检查/测试，不进最终代码
+    // ==========================================
+    "devDependencies": {
+        // --- 1. Babel 核心与语法支持 (把新语法翻译成老浏览器认识的 JS) ---
+        "@babel/core": "^7.29.7", // Babel 核心编译引擎
+        "@babel/preset-env": "^7.29.7", // 智能预设：根据目标浏览器自动转换 ES6+ 语法
+        "@babel/preset-react": "^7.29.7", // JSX 转换（配合 React 19 automatic runtime）
+        "@babel/preset-typescript": "^7.29.7", // 剥离 TypeScript 类型注解（Babel 编译 TS 速度极快）
+        "@babel/plugin-proposal-decorators": "^7.29.7", // 装饰器语法支持（如 @inject，MobX 常用）
+        "@babel/plugin-transform-class-properties": "^7.29.7", // 类属性定义语法（Babel 8 已从 proposal 扶正为 transform）
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3", // 支持 import() 动态按需加载语法
+        "@babel/plugin-transform-runtime": "^7.29.7", // 提取公共辅助函数，减小打包体积
+        "babel-loader": "^10.1.1", // Webpack ↔ Babel 转换桥梁
+        "babel-plugin-import": "^1.13.8", // 组件库按需加载插件
+        // --- 2. TypeScript ---
+        "typescript": "^6.0.3", // TypeScript 核心（类型检查 + 编辑器提示）
+        "@types/react": "^19.2.17", // React 类型声明
+        "@types/react-dom": "^19.2.3", // React-DOM 类型声明
+        "@types/jest": "^30.0.0", // Jest 类型声明
+        // --- 3. Webpack 核心工作流与构建提速 ---
+        "webpack": "^5.108.4", // Webpack 核心打包引擎
+        "webpack-cli": "^7.2.1", // Webpack 命令行工具
+        "webpack-dev-server": "^6.0.0", // 本地开发服务器（HMR + 代理）
+        "thread-loader": "^4.0.4", // 多线程加速编译
+        // --- 4. Webpack 插件群 ---
+        "html-webpack-plugin": "^5.6.7", // 自动生成 HTML 并注入打包后的 JS/CSS
+        "mini-css-extract-plugin": "^2.10.2", // 将 CSS 从 JS 中抽离成独立 .css 文件
+        "terser-webpack-plugin": "^5.6.1", // 压缩混淆 JS，清理 console.log
+        "copy-webpack-plugin": "^14.0.0", // 拷贝不需要编译的静态文件到 dist
+        // --- 5. 样式处理 (CSS / Less) ---
+        "css-loader": "^7.1.4", // 解析 CSS 中的 @import 和 url()
+        "less": "^4.8.0", // Less 预处理器核心
+        "less-loader": "^13.0.0", // Less → CSS 编译
+        "style-loader": "^4.0.0", // 开发环境将 CSS 注入 <style> 标签（速度快）
+        // --- 6. 代码质量与规范 (ESLint + Prettier) ---
+        "eslint": "^9.39.5", // ESLint 核心（代码规范检查）
+        "@typescript-eslint/eslint-plugin": "^8.65.0", // TS 语法规则插件
+        "@typescript-eslint/parser": "^8.65.0", // TS 解析器
+        "eslint-plugin-react": "^7.37.5", // React 最佳实践规则
+        "eslint-plugin-react-hooks": "^7.1.1", // Hooks 规则（依赖数组检查等）
+        "eslint-config-prettier": "^10.1.8", // 关闭 ESLint 与 Prettier 冲突的规则
+        "prettier": "^3.9.6", // 代码格式化工具
+        // --- 7. 单元测试 ---
+        "jest": "^30.4.2", // 测试框架
+        "ts-jest": "^29.4.12" // Jest 的 TS 转换器（直接跑 .ts 测试文件）
+    }
+}

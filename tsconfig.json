@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src", // 🌟 新增这一行：明确告诉 TS，src 才是真正的源码根目录
+        "outDir": "./built", // 指定 TypeScript 编译后的输出目录（因为有 Webpack 接管，这里更多是给 TS 提供逻辑上的类型映射点）
+        "allowJs": true, // 允许编译器编译 JS 文件，方便老项目 JS/JSX 和 TS/TSX 混合开发
+        "target": "esnext", // 编译的 ECMAScript 目标版本，'esnext' 指最新版（我们将降级的工作交给了 Babel，所以 TS 保持最新即可）
+        "module": "esnext", // 指定模块化规范，'esnext' 保留原生的 import/export，方便 Webpack 完美进行 Tree Shaking（摇树优化）
+        "moduleResolution": "bundler", // "bundler" 的意思是告诉 TypeScript：“你不用操心模块具体怎么去寻找，后续会有 Webpack 这个专业打包工具（Bundler）来接管一切，你只需要放行即可。” 这也是目前 React + Webpack5 最标准的现代配置写法。
+        "sourceMap": true, // 生成对应的 .map 文件，方便在浏览器控制台中直接调试 TypeScript 源码
+        "emitDecoratorMetadata": true, // 为装饰器发出设计类型的元数据（搭配 Reflect Metadata 使用，后端或者复杂依赖注入常用）
+        "experimentalDecorators": true, // 启用实验性的 ES 装饰器特性（前端用 MobX 之类的库时非常需要）
+        "removeComments": false, // 编译后的文件中不删除源码注释
+        "noImplicitAny": false, // 关闭隐式 any 类型的报错提示（不强制每个变量都必须写明类型，对渐进式改造比较友好）
+        "noUnusedLocals": false, // 允许存在定义了但未使用的局部变量（开发时不想因为一个没用到的变量一直报红线）
+        "importHelpers": true, // 结合 tslib 使用，从 tslib 导入全局的辅助函数（如 __extends），减少打包后代码的体积
+        "alwaysStrict": true, // 保证每个编译后的文件头部都带有 "use strict" 严格模式标识
+        "jsx": "react-jsx", // 🌟 React 19 新特性：自动注入 JSX 转换，写组件时无需在文件顶部手动 import React from 'react'
+        "allowSyntheticDefaultImports": true, // 允许默认导入没有设置默认导出的模块（允许 import React from 'react' 这种写法）
+        "lib": [ // 指定编译过程中需要用到的系统/环境内部类型声明文件
+            "esnext", // 包含最新的 JavaScript/ES 核心类型声明
+            "dom", // 包含浏览器 DOM/BOM 相关的类型声明（才能有 document、window 等提示）
+            "dom.iterable" // 允许使用 for...of 去遍历 DOM 集合（如 NodeList 节点列表）
+        ],
+        "skipLibCheck": true, // 🌟 极大提升编译速度的配置：跳过检查所有的 .d.ts 类型声明文件（尤其是 node_modules 里的）
+        "typeRoots": [ // 告诉 TypeScript 编译器去哪里寻找第三方库的类型声明
+            "node_modules/@types" // 第三方库下载的 @types 声明（如 @types/react）
+        ]
+    },
+    "include": [ // 指定需要被 TypeScript 处理的文件范围
+        "src/**/*" // 包含 src 目录下的所有文件夹和任意类型文件
+    ],
+    "exclude": [ // 指定需要被 TypeScript 忽略的文件范围（防止编译时间过长）
+        "node_modules", // 排除所有安装的第三方依赖库
+        "node_modules/antd/*" // 单独强调排除 antd 的源码（通常 node_modules 已经包含，这里是双保险）
+    ]
+}

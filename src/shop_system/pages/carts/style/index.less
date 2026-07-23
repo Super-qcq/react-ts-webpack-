@@ -1,0 +1,33 @@
+/* ===== 购物车 ===== */
+.cart-page {
+  .cart-card {
+    border-radius: 12px;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+  }
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cart-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  .cart-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: #f5222d;
+    text-align: right;
+  }
+}
