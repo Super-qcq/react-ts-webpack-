@@ -1,0 +1,55 @@
+/* ===== 学生详情页 ===== */
+
+.student-detail {
+  .detail-select {
+    margin-bottom: 20px;
+  }
+
+  .detail-posts {
+    .detail-post {
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: all 0.3s;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
+    .detail-post-title {
+      font-weight: 600;
+    }
+  }
+
+  .detail-albums {
+    .album-card {
+      border-radius: 8px;
+      transition: all 0.3s;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
+    .album-cover {
+      height: 120px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: #fff;
+    }
+  }
+
+  .detail-todos {
+    .todo-title {
+      font-weight: 500;
+    }
+    .todo-done {
+      text-decoration: line-through;
+      color: #bbb;
+    }
+    .todo-pending {
+      color: #333;
+    }
+  }
+}

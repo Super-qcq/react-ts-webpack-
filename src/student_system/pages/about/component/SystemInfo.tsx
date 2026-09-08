@@ -49,7 +49,9 @@ class SystemInfo extends React.Component<object, SystemInfoState> {
       { label: 'Axios', version: '1.x', tag: 'purple', desc: '/api 代理 → JSONPlaceholder' },
     ],
     changelog: [
-      { time: '2026-07-20', content: '7 个页面全覆盖 JSONPlaceholder 全部 API', color: 'blue' },
+      { time: '2026-07-20', content: '9 个页面全覆盖 JSONPlaceholder 全部 API', color: 'blue' },
+      { time: '2026-07-20', content: '数据看板：Promise.all 并发聚合 6 类 API', color: 'cyan' },
+      { time: '2026-07-20', content: '学生详情：嵌套资源 /users/:id/posts 等', color: 'cyan' },
       {
         time: '2026-07-20',
         content: '组件拆分：每页 index.tsx + component + style',
@@ -60,7 +62,7 @@ class SystemInfo extends React.Component<object, SystemInfoState> {
     ],
     capabilities: [
       { label: 'TypeScript 覆盖率', value: 100, suffix: '%' },
-      { label: '页面组件数', value: 14, suffix: '个' },
+      { label: '页面组件数', value: 16, suffix: '个' },
       { label: 'API 端点数', value: 6, suffix: '个' },
     ],
   };

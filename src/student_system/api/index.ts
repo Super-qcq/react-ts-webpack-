@@ -50,3 +50,23 @@ export async function fetchAlbums(params: PageParams): Promise<ListResult<Album>
   const res = await axios.get<Album[]>('/api/albums', { params });
   return { data: res.data, total: extractTotal(res) };
 }
+
+// ====== 嵌套资源 API（/users/:id/xxx） ======
+
+/** 某学生的公告列表 */
+export async function fetchUserPosts(userId: number): Promise<Post[]> {
+  const res = await axios.get<Post[]>(`/api/users/${userId}/posts`);
+  return res.data;
+}
+
+/** 某学生的相册列表 */
+export async function fetchUserAlbums(userId: number): Promise<Album[]> {
+  const res = await axios.get<Album[]>(`/api/users/${userId}/albums`);
+  return res.data;
+}
+
+/** 某学生的待办列表 */
+export async function fetchUserTodos(userId: number): Promise<Todo[]> {
+  const res = await axios.get<Todo[]>(`/api/users/${userId}/todos`);
+  return res.data;
+}

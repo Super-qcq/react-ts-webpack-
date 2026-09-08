@@ -5,7 +5,19 @@
  */
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
-import type { Product, Cart, User, PageParams, DummyResponse, ListResult } from '../types';
+import type {
+  Product,
+  Cart,
+  User,
+  Quote,
+  Recipe,
+  ShopPost,
+  PostComment,
+  ShopTodo,
+  PageParams,
+  DummyResponse,
+  ListResult,
+} from '../types';
 
 // ====== 工具 ======
 const BASE = '/shop-api';
@@ -54,4 +66,48 @@ export async function fetchCarts(params: PageParams = {}): Promise<ListResult<Ca
 export async function fetchUsers(params: PageParams = {}): Promise<ListResult<User>> {
   const res = await axios.get<DummyResponse<User>>(`${BASE}/users`, { params });
   return { list: res.data.users || [], total: getTotal(res) };
+}
+
+/** 每日一言列表 */
+export async function fetchQuotes(params: PageParams = {}): Promise<ListResult<Quote>> {
+  const res = await axios.get<DummyResponse<Quote>>(`${BASE}/quotes`, { params });
+  return { list: res.data.quotes || [], total: getTotal(res) };
+}
+
+/** 随机一言 */
+export async function fetchRandomQuote(): Promise<Quote> {
+  const res = await axios.get<Quote>(`${BASE}/quotes/random`);
+  return res.data;
+}
+
+/** 菜谱列表 */
+export async function fetchRecipes(params: PageParams = {}): Promise<ListResult<Recipe>> {
+  const res = await axios.get<DummyResponse<Recipe>>(`${BASE}/recipes`, { params });
+  return { list: res.data.recipes || [], total: getTotal(res) };
+}
+
+/** 商城资讯列表 */
+export async function fetchShopPosts(params: PageParams = {}): Promise<ListResult<ShopPost>> {
+  const res = await axios.get<DummyResponse<ShopPost>>(`${BASE}/posts`, { params });
+  return { list: res.data.posts || [], total: getTotal(res) };
+}
+
+/** 帖子评论列表 */
+export async function fetchPostComments(postId: number): Promise<ListResult<PostComment>> {
+  const res = await axios.get<DummyResponse<PostComment>>(`${BASE}/comments/post/${postId}`, {
+    params: { limit: 100 },
+  });
+  return { list: res.data.comments || [], total: getTotal(res) };
+}
+
+/** 商城待办列表 */
+export async function fetchShopTodos(params: PageParams = {}): Promise<ListResult<ShopTodo>> {
+  const res = await axios.get<DummyResponse<ShopTodo>>(`${BASE}/todos`, { params });
+  return { list: res.data.todos || [], total: getTotal(res) };
+}
+
+/** 评论广场列表 */
+export async function fetchComments(params: PageParams = {}): Promise<ListResult<PostComment>> {
+  const res = await axios.get<DummyResponse<PostComment>>(`${BASE}/comments`, { params });
+  return { list: res.data.comments || [], total: getTotal(res) };
 }

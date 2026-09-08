@@ -9,9 +9,11 @@ import {
   CameraOutlined,
   MessageOutlined,
   FolderOutlined,
+  DashboardOutlined,
+  IdcardOutlined,
 } from '@ant-design/icons';
 
-// 🌟 页面组件（7 个页面，覆盖 JSONPlaceholder 全部 6 类 API）
+// 🌟 页面组件（9 个页面，覆盖 JSONPlaceholder 全部 6 类 API）
 import Home from './pages/home';
 import About from './pages/about';
 import Posts from './pages/posts';
@@ -19,10 +21,14 @@ import Comments from './pages/comments';
 import Albums from './pages/albums';
 import Todos from './pages/todos';
 import Photos from './pages/photos';
+import Dashboard from './pages/dashboard';
+import Detail from './pages/detail';
 
 // ====== 🌟 导航配置（集中管理路由、标签、图标） ======
 const NAV_ITEMS = [
+  { path: '/dashboard', label: '数据看板', icon: <DashboardOutlined /> },
   { path: '/home', label: '学生列表', icon: <HomeOutlined /> },
+  { path: '/detail', label: '学生详情', icon: <IdcardOutlined /> },
   { path: '/posts', label: '校园公告', icon: <SoundOutlined /> },
   { path: '/comments', label: '评论留言', icon: <MessageOutlined /> },
   { path: '/albums', label: '相册列表', icon: <FolderOutlined /> },
@@ -62,7 +68,9 @@ const AppLayout = () => {
         <Routes>
           {/* 🌟 默认跳转首页 */}
           <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/detail" element={<Detail />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/comments" element={<Comments />} />
           <Route path="/albums" element={<Albums />} />

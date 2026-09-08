@@ -74,6 +74,22 @@ class AboutClass extends React.Component<AboutProps> {
                     ),
                   },
                   {
+                    color: 'cyan',
+                    children: (
+                      <div>
+                        <Tag>2026-07-20</Tag>每日一言 + 菜谱中心 + 商城资讯（新增 3 页）
+                      </div>
+                    ),
+                  },
+                  {
+                    color: 'cyan',
+                    children: (
+                      <div>
+                        <Tag>2026-07-20</Tag>待办清单 + 评论广场（新增 2 页）
+                      </div>
+                    ),
+                  },
+                  {
                     color: 'orange',
                     dot: <CheckCircleOutlined />,
                     children: (

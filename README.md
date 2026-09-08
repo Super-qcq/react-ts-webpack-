@@ -32,8 +32,8 @@
 
 ```
 同一个仓库
-├── 学生管理系统（student-system）  ← 7 个页面 + 完整企业级工程化
-├── 电商管理系统（shop-system）    ← 4 个页面 + 交互功能
+├── 学生管理系统（student-system）  ← 9 个页面 + 完整企业级工程化
+├── 电商管理系统（shop-system）    ← 9 个页面 + 交互功能
 ├── 教师管理系统（teacher-system）  ← 随时加
 └── ...你想加多少加多少
 ```
@@ -526,17 +526,35 @@ Table / Card / Statistic 开箱即用
 
 ## 示例项目：学生管理系统
 
-7 个页面，覆盖 JSONPlaceholder 全部 6 类 API：
+9 个页面，覆盖 JSONPlaceholder 全部 6 类 API：
 
 | 页面 | API | 亮点 |
 |------|-----|------|
+| 数据看板 | 全部 6 类 API | Promise.all 并发聚合 + Statistic + 完成率 |
 | 学生列表 | `/api/users` | Avatar + Statistic + 分页 |
+| 学生详情 | `/api/users/:id/posts` 等 | 嵌套资源 + Tabs + 按学生筛选 |
 | 校园公告 | `/api/posts` | 卡片列表 + 搜索 + 展开全文 |
 | 评论留言 | `/api/comments` | 聊天气泡 + 按帖子筛选 |
 | 相册列表 | `/api/albums` | 渐变色封面卡片 |
 | 待办事项 | `/api/todos` | 完成率进度圈 |
 | 校园相册 | `/api/photos` | Card 网格 + 大图预览 |
 | 关于系统 | — | Descriptions + Timeline |
+
+## 示例项目：电商管理系统
+
+9 个页面，覆盖 DummyJSON 商品 / 购物车 / 用户 / 名言 / 菜谱 / 帖子 / 待办 / 评论：
+
+| 页面 | API | 亮点 |
+|------|-----|------|
+| 商品中心 | `/shop-api/products` | 搜索 + 分类 + 折扣标签 + 收藏 |
+| 购物车 | `/shop-api/carts` | 订单统计 + 商品明细 |
+| 客户管理 | `/shop-api/users` | 客户卡片 + 分页 |
+| 每日一言 | `/shop-api/quotes` | 随机一言 + 换一句 |
+| 菜谱中心 | `/shop-api/recipes` | 菜谱卡片 + 食材步骤弹窗 |
+| 商城资讯 | `/shop-api/posts` | 资讯列表 + 评论弹窗 |
+| 待办清单 | `/shop-api/todos` | 完成率进度圈 + 状态筛选 |
+| 评论广场 | `/shop-api/comments` | 评论卡片 + 用户聚合 |
+| 关于商城 | — | Descriptions + Timeline |
 
 ---
 
