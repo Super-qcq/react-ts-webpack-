@@ -223,6 +223,11 @@ module.exports = (env, argv) => {
                     changeOrigin: true,
                     pathRewrite: { '^/shop-api': '' },
                 },
+                {
+                    context: ['/kb-api'], // 智能校务问答 — 以 /kb-api 开头 → Python 后端
+                    target: 'http://127.0.0.1:8003',
+                    changeOrigin: true,
+                },
             ]
         },
         // 🌟 Webpack 5 缓存机制：极大提升二次启动和打包速度，利用文件系统把缓存存到硬盘里
