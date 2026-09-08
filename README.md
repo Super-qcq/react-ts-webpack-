@@ -486,18 +486,20 @@ node src/student_system/serve.js      # → http://localhost:8081
 
 ## 生产部署
 
-**线上访问地址：** https://react-ts-webpack.pages.dev
+**线上访问地址：**
+- 学生管理系统：https://react-ts-webpack.pages.dev
+- 电商管理系统：https://shop-system-f0b.pages.dev
 
 **Cloudflare 账号：** 使用 Google 账号 OAuth 登录（非邮箱/密码注册，非 GitHub 登录）
 
 ### Cloudflare Pages（免费）
 
-| 字段 | 值 |
-|------|-----|
-| Pages 项目名 | `react-ts-webpack` |
-| Build command | `npm run build --module=student-system` |
-| Build output directory | `dist/student-system` |
-| 关联 GitHub 仓库 | `Super-qcq/react-ts-webpack-` |
+| 项目 | Pages 项目名 | 线上地址 | Build command | Build output |
+|------|-------------|----------|---------------|-------------|
+| 学生管理系统 | `student-system` | https://react-ts-webpack.pages.dev | `npm run build --module=student-system` | `dist/student-system` |
+| 电商管理系统 | `shop-system` | https://shop-system-f0b.pages.dev | `npm run build --module=shop-system` | `dist/shop-system` |
+
+两个 Pages 项目均关联 GitHub 仓库 `Super-qcq/react-ts-webpack-`，push 到 main 分支自动部署。
 
 ### API 代理（三处配置）
 
