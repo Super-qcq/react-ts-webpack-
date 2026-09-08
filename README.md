@@ -486,14 +486,18 @@ node src/student_system/serve.js      # → http://localhost:8081
 
 ## 生产部署
 
-线上地址：`https://student-system-xxx.pages.dev`
+**线上访问地址：** https://react-ts-webpack.pages.dev
+
+**Cloudflare 账号：** 使用 Google 账号 OAuth 登录（非邮箱/密码注册，非 GitHub 登录）
 
 ### Cloudflare Pages（免费）
 
 | 字段 | 值 |
 |------|-----|
+| Pages 项目名 | `react-ts-webpack` |
 | Build command | `npm run build --module=student-system` |
 | Build output directory | `dist/student-system` |
+| 关联 GitHub 仓库 | `Super-qcq/react-ts-webpack-` |
 
 ### API 代理（三处配置）
 
