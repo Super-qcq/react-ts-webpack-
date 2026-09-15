@@ -451,7 +451,7 @@ npm run check      # 提交前最终检查
 
 ```bash
 # 开发
-npm run start --module=student-system
+npm run start --module=rag_agent
 
 # 打包
 npm run build --module=student-system   # → dist/student-system/
