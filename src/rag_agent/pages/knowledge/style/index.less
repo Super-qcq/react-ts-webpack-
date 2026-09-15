@@ -1,0 +1,70 @@
+/* ===== 知识库管理页 ===== */
+
+.kb-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #eef2f8;
+  box-shadow: 0 6px 24px rgba(30, 80, 180, 0.05);
+  padding: 16px;
+}
+
+/* 全量/刷新 操作栏 */
+.kb-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+}
+
+/* 上传条：左说明 + 右「上传并索引」，干净不挤 */
+.kb-upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, #f7faff, #fbfcff);
+  border: 1px dashed #b7cdf5;
+  border-left: 4px solid #2563eb;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.kb-upload-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.kb-upload-ic {
+  font-size: 22px;
+  color: #1677ff;
+  line-height: 26px;
+}
+.kb-upload-title {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+}
+.kb-upload-sub {
+  color: #595959;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 2px;
+}
+.kb-upload-fmts {
+  color: #999;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.kb-upload-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.kb-upload-status {
+  color: #1677ff;
+  font-size: 12px;
+}
